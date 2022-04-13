@@ -3,6 +3,6 @@ const BLOGS_ROOT = "blogs";
 
 const getBlogs = `${HOST}/${BLOGS_ROOT}`;
 
-const blogById = (id) => `${getBlogs}/${id}`;
+const blogById = (id, relative) => `${BLOGS_ROOT}/${id}`;
 
 export { getBlogs, blogById };
