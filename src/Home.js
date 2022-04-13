@@ -4,6 +4,7 @@ import BlogList from "./components/BlogList";
 
 export default function Home() {
   const [blogs, setBlogs] = useState(null);
+  const [isPending, setIsPending] = useState(true);
 
   const handleDelete = (blogId) => {
     const newBlogs = blogs.filter((blog) => blog.id !== blogId);
@@ -14,10 +15,16 @@ export default function Home() {
   useEffect(() => {
     fetch(getBlogs)
       .then((res) => res.json())
-      .then((blogs) => setBlogs(blogs));
+      .then((blogs) => {
+        setBlogs(blogs);
+        setIsPending(false);
+      });
   }, []);
 
   return (
-    <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />
+    <div className="home">
+      {isPending && <div>Loading ...</div>}
+      <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />
+    </div>
   );
 }
