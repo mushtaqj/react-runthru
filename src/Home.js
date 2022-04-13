@@ -3,7 +3,14 @@ import BlogList from "./components/BlogList";
 import { ALL_BLOGS } from "./data/blogs";
 
 export default function Home() {
-  const [blogs] = useState(ALL_BLOGS);
+  const [blogs, setBlogs] = useState(ALL_BLOGS);
 
-  return <BlogList blogs={blogs} title="All Blogs"/>;
+  const handleDelete = (blogId) => {
+    const newBlogs = blogs.filter((blog) => blog.id !== blogId);
+    setBlogs(newBlogs);
+  };
+
+  return (
+    <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />
+  );
 }
