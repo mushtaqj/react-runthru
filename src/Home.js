@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { ALL_BLOGS } from "./data/blogs";
 
 export default function Home() {
-
-  const [name, setName] = useState('mario');
-
-  const handleClick = (name) => (setName(name));
+  const [blogs, setBlogs] = useState(ALL_BLOGS);
 
   return (
     <div className="home">
-      <h2>Homepage</h2>
-      <p>{name}</p>
-      <button onClick={() => handleClick("luigi")}>Click Me</button>
+      {blogs.map((blog) => (
+        <div className="blog-preview" key={blog.id}>
+          <h2>{blog.title}</h2>
+          <p>Written by : {blog.author}</p>
+        </div>
+      ))}
     </div>
   );
 }
