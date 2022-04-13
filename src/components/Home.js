@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getBlogs } from "./api";
-import BlogList from "./components/BlogList";
+import { getBlogs } from "../api";
+import BlogList from "./BlogList";
 
 export default function Home() {
   const [blogs, setBlogs] = useState(null);
