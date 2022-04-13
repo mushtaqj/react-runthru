@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { getBlogs } from "./api";
 import BlogList from "./components/BlogList";
 
 export default function Home() {
-  const [blogs, setBlogs] = useState(ALL_BLOGS);
+  const [blogs, setBlogs] = useState(null);
 
   const handleDelete = (blogId) => {
     const newBlogs = blogs.filter((blog) => blog.id !== blogId);
@@ -10,7 +11,11 @@ export default function Home() {
   };
 
   // Run every time a component is rendered
-  useEffect(() => console.log("use effect ran"));
+  useEffect(() => {
+    fetch(getBlogs)
+      .then((res) => res.json())
+      .then((blogs) => setBlogs(blogs));
+  }, []);
 
   return (
     <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />
